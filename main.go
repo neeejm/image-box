@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	ut "image-box/utils"
+
+	ut "github.com/neeejm/image-box/utils"
 )
 
 const LINE_WIDTH = 8

@@ -1,4 +1,4 @@
-module image-box
+module github.com/neeejm/image-box
 
 go 1.17
 
