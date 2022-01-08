@@ -15,6 +15,13 @@ type Box struct {
 }
 
 func DrawBox(box Box) {
+	// set Box default values
+	if box.LineColor == "" {
+		box.LineColor = "#0488D0" // shade of blue
+	}
+	if box.LineWidth == 0 {
+		box.LineWidth = 7.5
+	}
 	// load image from path
 	im, err := gg.LoadPNG("face.png")
 	if err != nil {

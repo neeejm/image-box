@@ -16,8 +16,6 @@ func main() {
 		RightCol:  0.7593585,
 		BottomRow: 0.84501964,
 		LeftCol:   0.33775616,
-		LineWidth: 7.5,
-		LineColor: "#0488D0", // shade of blue
 	}
 
 	ut.DrawBox(box)
