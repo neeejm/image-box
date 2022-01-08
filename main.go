@@ -18,5 +18,5 @@ func main() {
 		LeftCol:   0.33775616,
 	}
 
-	ut.DrawBox(box)
+	ut.DrawBox("face.png", box)
 }
