@@ -7,9 +7,9 @@ import (
 type Box struct {
 	// clarifai api bounding box coordinates
 	TopRow    float64
-	RightRow  float64
+	RightCol  float64
 	BottomRow float64
-	LeftRow   float64
+	LeftCol   float64
 	LineWidth float64
 	LineColor string
 }
@@ -30,7 +30,7 @@ func DrawBox(box Box) {
 	dc.SetHexColor(box.LineColor)
 
 	// draw left column -- start
-	x1 := float64(box.LeftRow) * float64(w)
+	x1 := float64(box.LeftCol) * float64(w)
 	y1 := float64(box.TopRow) * float64(h)
 	x2 := x1
 	y2 := float64(box.BottomRow) * float64(h)
@@ -41,9 +41,9 @@ func DrawBox(box Box) {
 	// draw left column -- end
 
 	// draw top column -- start
-	x1 = float64(box.LeftRow) * float64(w)
+	x1 = float64(box.LeftCol) * float64(w)
 	y1 = float64(box.TopRow) * float64(h)
-	x2 = float64(box.RightRow) * float64(w)
+	x2 = float64(box.RightCol) * float64(w)
 	y2 = y1
 
 	dc.SetLineWidth(float64(box.LineWidth))
@@ -52,7 +52,7 @@ func DrawBox(box Box) {
 	// draw top column -- end
 
 	// draw right column -- start
-	x1 = float64(box.RightRow) * float64(w)
+	x1 = float64(box.RightCol) * float64(w)
 	y1 = float64(box.TopRow) * float64(h)
 	x2 = x1
 	y2 = float64(box.BottomRow) * float64(h)
@@ -63,9 +63,9 @@ func DrawBox(box Box) {
 	// draw right column -- end
 
 	// draw bottom column -- start
-	x1 = float64(box.LeftRow) * float64(w)
+	x1 = float64(box.LeftCol) * float64(w)
 	y1 = float64(box.BottomRow) * float64(h)
-	x2 = float64(box.RightRow) * float64(w)
+	x2 = float64(box.RightCol) * float64(w)
 	y2 = y1
 
 	dc.SetLineWidth(box.LineWidth)
