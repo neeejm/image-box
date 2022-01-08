@@ -14,7 +14,7 @@ type Box struct {
 	LineColor string
 }
 
-func DrawBox(box Box) {
+func DrawBox(imgUrl string, box Box) {
 	// set Box default values
 	if box.LineColor == "" {
 		box.LineColor = "#0488D0" // shade of blue
@@ -23,7 +23,7 @@ func DrawBox(box Box) {
 		box.LineWidth = 7.5
 	}
 	// load image from path
-	im, err := gg.LoadPNG("face.png")
+	im, err := gg.LoadImage(imgUrl)
 	if err != nil {
 		panic(err)
 	}
