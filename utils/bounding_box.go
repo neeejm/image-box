@@ -1,7 +1,11 @@
 package utils
 
 import (
+	"io/ioutil"
+	"log"
+
 	"github.com/fogleman/gg"
+	"github.com/golang/freetype/truetype"
 )
 
 type Box struct {
@@ -85,4 +89,26 @@ func DrawBox(imgUrl string, box Box) {
 
 func CropBox(box Box) {
 
+}
+
+func DrawText(path string) {
+	TTF, err := ioutil.ReadFile(path)
+	font, err := truetype.Parse(TTF)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	face := truetype.NewFace(font, &truetype.Options{Size: 48})
+
+	h := 250
+	w := 500
+	dc := gg.NewContext(w, h)
+	dc.DrawRectangle(0, 0, float64(w), float64(h))
+	dc.SetHexColor("#ffffff")
+	dc.Fill()
+	dc.Clear()
+	dc.SetHexColor("#00")
+	dc.SetFontFace(face)
+	dc.DrawStringAnchored("Hello, world!", 50, 125, 0, 0)
+	dc.SavePNG("text.png")
 }
