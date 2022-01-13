@@ -18,14 +18,7 @@ type Box struct {
 	LineColor string
 }
 
-func DrawBox(imgUrl string, box Box) {
-	// set Box default values
-	if box.LineColor == "" {
-		box.LineColor = "#0488D0" // shade of blue
-	}
-	if box.LineWidth == 0 {
-		box.LineWidth = 7.5
-	}
+func DrawBox(imgUrl string, box []Box) {
 	// load image from path
 	im, err := gg.LoadImage(imgUrl)
 	if err != nil {
@@ -38,51 +31,61 @@ func DrawBox(imgUrl string, box Box) {
 	// draw the canvas
 	dc := gg.NewContextForImage(im)
 	dc.DrawImage(im, w, h)
-	dc.SetHexColor(box.LineColor)
 
-	// draw left column -- start
-	x1 := float64(box.LeftCol) * float64(w)
-	y1 := float64(box.TopRow) * float64(h)
-	x2 := x1
-	y2 := float64(box.BottomRow) * float64(h)
+	for _, b := range box {
+		// set Box default values
+		if b.LineColor == "" {
+			b.LineColor = "#0488D0" // shade of blue
+		}
+		if b.LineWidth == 0 {
+			b.LineWidth = 7.5
+		}
+		dc.SetHexColor(b.LineColor)
 
-	dc.SetLineWidth(box.LineWidth)
-	dc.DrawLine(x1, y1, x2, y2)
-	dc.Stroke()
-	// draw left column -- end
+		// draw left column -- start
+		x1 := float64(b.LeftCol) * float64(w)
+		y1 := float64(b.TopRow) * float64(h)
+		x2 := x1
+		y2 := float64(b.BottomRow) * float64(h)
 
-	// draw top column -- start
-	x1 = float64(box.LeftCol) * float64(w)
-	y1 = float64(box.TopRow) * float64(h)
-	x2 = float64(box.RightCol) * float64(w)
-	y2 = y1
+		dc.SetLineWidth(b.LineWidth)
+		dc.DrawLine(x1, y1, x2, y2)
+		dc.Stroke()
+		// draw left column -- end
 
-	dc.SetLineWidth(float64(box.LineWidth))
-	dc.DrawLine(x1, y1, x2, y2)
-	dc.Stroke()
-	// draw top column -- end
+		// draw top column -- start
+		x1 = float64(b.LeftCol) * float64(w)
+		y1 = float64(b.TopRow) * float64(h)
+		x2 = float64(b.RightCol) * float64(w)
+		y2 = y1
 
-	// draw right column -- start
-	x1 = float64(box.RightCol) * float64(w)
-	y1 = float64(box.TopRow) * float64(h)
-	x2 = x1
-	y2 = float64(box.BottomRow) * float64(h)
+		dc.SetLineWidth(float64(b.LineWidth))
+		dc.DrawLine(x1, y1, x2, y2)
+		dc.Stroke()
+		// draw top column -- end
 
-	dc.SetLineWidth(box.LineWidth)
-	dc.DrawLine(x1, y1, x2, y2)
-	dc.Stroke()
-	// draw right column -- end
+		// draw right column -- start
+		x1 = float64(b.RightCol) * float64(w)
+		y1 = float64(b.TopRow) * float64(h)
+		x2 = x1
+		y2 = float64(b.BottomRow) * float64(h)
 
-	// draw bottom column -- start
-	x1 = float64(box.LeftCol) * float64(w)
-	y1 = float64(box.BottomRow) * float64(h)
-	x2 = float64(box.RightCol) * float64(w)
-	y2 = y1
+		dc.SetLineWidth(b.LineWidth)
+		dc.DrawLine(x1, y1, x2, y2)
+		dc.Stroke()
+		// draw right column -- end
 
-	dc.SetLineWidth(box.LineWidth)
-	dc.DrawLine(x1, y1, x2, y2)
-	dc.Stroke()
-	// draw bottom column -- end
+		// draw bottom column -- start
+		x1 = float64(b.LeftCol) * float64(w)
+		y1 = float64(b.BottomRow) * float64(h)
+		x2 = float64(b.RightCol) * float64(w)
+		y2 = y1
+
+		dc.SetLineWidth(b.LineWidth)
+		dc.DrawLine(x1, y1, x2, y2)
+		dc.Stroke()
+		// draw bottom column -- end
+	}
 
 	dc.SavePNG("out.png")
 }
