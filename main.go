@@ -32,7 +32,7 @@ func main() {
 	// 	},
 	// }
 
-	ut.CropImage("face.png", box)
+	ut.CropImage("face.png", box, "cropped.png")
 
 	// ut.DrawBox("face.png", box)
 

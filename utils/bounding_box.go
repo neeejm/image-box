@@ -197,7 +197,7 @@ func writeImage(img image.Image, name string) error {
 	return png.Encode(fd, img)
 }
 
-func CropImage(name string, box Box) {
+func CropImage(name string, box Box, outputName string) {
 	im, err := readImage(name)
 	if err != nil {
 		panic(err)
@@ -222,7 +222,7 @@ func CropImage(name string, box Box) {
 		panic("not supported")
 	}
 
-	writeImage(cim.SubImage(crop), "cropped-face.png")
+	writeImage(cim.SubImage(crop), outputName)
 }
 
 func DrawText(path string) {
