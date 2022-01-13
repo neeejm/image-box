@@ -21,9 +21,9 @@ type Box struct {
 	LineColor string
 }
 
-func DrawBox(imgUrl string, box []Box) {
+func DrawBox(name string, box []Box, outputName string) {
 	// load image from path
-	im, err := gg.LoadImage(imgUrl)
+	im, err := gg.LoadImage(name)
 	if err != nil {
 		panic(err)
 	}
@@ -90,7 +90,7 @@ func DrawBox(imgUrl string, box []Box) {
 		// draw bottom column -- end
 	}
 
-	dc.SavePNG("out.png")
+	dc.SavePNG(outputName)
 }
 
 // func CropBox(imgUrl string, box []Box) {
